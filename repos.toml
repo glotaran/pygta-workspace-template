@@ -1,0 +1,54 @@
+[defaults]
+canonical_owner = "glotaran"
+clone_protocol = "https"
+fallback_branch = "main"
+
+[[core]]
+name = "pyglotaran"
+directory = "pyglotaran"
+preferred_owner = "glotaran"
+repo = "pyglotaran"
+branch = "main"
+is_python_package = true
+include_in_uv_workspace = true
+notes = "Core editable dependency from the canonical upstream."
+
+[[core]]
+name = "pyglotaran-extras"
+directory = "pyglotaran-extras"
+preferred_owner = "glotaran"
+repo = "pyglotaran-extras"
+branch = "main"
+is_python_package = true
+include_in_uv_workspace = true
+notes = "Core editable dependency from the canonical upstream."
+
+[[extras]]
+name = "pyglotaran-examples"
+directory = "pyglotaran-examples"
+preferred_owner = "glotaran"
+repo = "pyglotaran-examples"
+branch = "main"
+is_python_package = false
+include_in_uv_workspace = false
+notes = "Examples repository; not a workspace member by default."
+
+[[extras]]
+name = "pyglotaran-publications"
+directory = "pyglotaran-publications"
+preferred_owner = "glotaran"
+repo = "pyglotaran-publications"
+branch = "main"
+is_python_package = false
+include_in_uv_workspace = false
+notes = "Reference material; not a workspace member by default."
+
+[[extras]]
+name = "pyglotaran-release-paper-supplementary-information"
+directory = "pyglotaran-release-paper-supplementary-information"
+preferred_owner = "glotaran"
+repo = "pyglotaran-release-paper-supplementary-information"
+branch = "main"
+is_python_package = false
+include_in_uv_workspace = false
+notes = "Reference material; not a workspace member by default."

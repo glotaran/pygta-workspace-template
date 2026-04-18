@@ -1,0 +1,43 @@
+# Workspace-root ruff config — covers pygta-local-extras and analysis projects.
+# external/ packages have their own configs and are excluded here.
+
+extend-exclude = [
+  "external/",
+]
+line-length = 99
+target-version = "py310"
+
+[lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "I",   # isort
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "T10", # flake8-debugger
+  "ISC", # flake8-implicit-str-concat
+  "PIE", # flake8-pie
+  "RSE", # flake8-raise
+  "RET", # flake8-return
+  "SIM", # flake8-simplify
+  "PTH", # flake8-use-pathlib
+  "ERA", # eradicate (commented-out code)
+  "RUF", # Ruff-specific
+]
+ignore = [
+  # Covered by formatter
+  "ISC001",
+  "ISC002",
+  # Unicode confusables — not an issue in scientific code
+  "RUF001",
+  "RUF002",
+  "RUF003",
+]
+
+[lint.isort]
+force-single-line = true
+
+[lint.per-file-ignores]
+"tests/*" = ["RET", "B"]

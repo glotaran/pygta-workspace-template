@@ -1,0 +1,75 @@
+# Workspace-root pre-commit config.
+# Covers pygta-local-extras and analysis projects; external/ is excluded (each
+# package there has its own pre-commit config).
+#
+# Run with:
+#   pre-commit run --all-files
+#
+# Install hooks once with:
+#   pre-commit install
+
+exclude: ^external/
+
+repos:
+  # Basic file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # Strip notebook outputs before committing
+  - repo: https://github.com/kynan/nbstripout
+    rev: 186d22f
+    hooks:
+      - id: nbstripout
+        args: [--drop-empty-cells]
+
+  # Python formatting and linting (non-notebook)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.1
+    hooks:
+      - id: ruff
+        name: "ruff sort imports"
+        args: ["--fix", "--select=I"]
+        types_or: [python, pyi]
+      - id: ruff-format
+        types_or: [python, pyi]
+      - id: ruff
+        name: "ruff lint"
+        types_or: [python, pyi]
+
+  # Notebook formatting and linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.1
+    hooks:
+      - id: ruff
+        name: "ruff sort imports notebooks"
+        args: ["--fix", "--select=I", "--config=.ruff-notebooks.toml"]
+        alias: isort-notebooks
+        types_or: [jupyter]
+      - id: ruff-format
+        name: "ruff format notebooks"
+        types_or: [jupyter]
+        args: ["--config=.ruff-notebooks.toml"]
+        alias: format-notebooks
+      - id: ruff
+        name: "ruff lint notebooks"
+        types_or: [jupyter]
+        args: ["--config=.ruff-notebooks.toml"]
+        alias: check-notebooks
+
+  # Spell checking
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        types: [file]
+        types_or: [python, pyi, markdown, rst, jupyter]
+        args: ["--ignore-words-list=doas"]

@@ -1,0 +1,15 @@
+[project]
+name = "pygta-workspace-template"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "ipykernel>=7.2.0",
+    "pyglotaran",
+    "pyglotaran-extras",
+    "pygta-local-extras",
+]
+
+[tool.uv.sources]
+pyglotaran = { path = "external/pyglotaran", editable = true }
+pyglotaran-extras = { path = "external/pyglotaran-extras", editable = true }
+pygta-local-extras = { path = "pygta-local-extras", editable = true }

@@ -1,0 +1,14 @@
+#:schema https://json.schemastore.org/ruff.json
+extend = ".ruff.toml"
+
+[lint]
+extend-ignore = [
+  "E402",   # module-level import not at top (common in notebooks)
+  "F401",   # unused imports (often intentional re-exports in notebooks)
+  "F404",   # late future imports (notebook execution order)
+  "ERA001", # commented-out code (fine in exploratory notebooks)
+  "T20",    # print statements (fine in notebooks)
+]
+
+[lint.isort]
+force-single-line = false
